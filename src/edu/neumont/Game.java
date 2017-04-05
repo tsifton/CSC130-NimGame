@@ -4,7 +4,6 @@ package edu.neumont;
  * Created by Trevor on 4/4/2017.
  */
 public class Game {
-	
 
     private Board board = new Board();
     private Player p1, p2;
