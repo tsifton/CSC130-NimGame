@@ -1,6 +1,5 @@
 package edu.neumont;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -8,6 +7,7 @@ import java.util.Scanner;
  */
 
 public class HumanPlayer implements Player{
+	
 	private class PlayerInput {
 		public int row;
 		public int numPieces;
@@ -16,21 +16,25 @@ public class HumanPlayer implements Player{
 			this.numPieces = numPieces;
 		}
 	}
+	
     public void makeMove(Board board) {
-    	PlayerInput input = getInput();
-    	board.removePiece(input.row, input.numPieces);
+    	PlayerInput input;
+    	do {
+        	input = getInput();
+    	} while(!board.removePiece(input.row, input.numPieces));
+    }
+    
+    private int getInt(Scanner scan, String message) {
+    	do {
+        	System.out.print(message);	
+    	} while(!scan.hasNextInt());
+    	return scan.nextInt();
     }
     
     private PlayerInput getInput() {
     	Scanner scan = new Scanner(System.in);
-    	System.out.print("Which Row would you like to select from? ");
-    	boolean rowCheck = scan.hasNextInt();
-    	int row = scan.nextInt();
-    	System.out.print("How many pieces do you want to remove from this row? ");
-    	Scanner scan2 = new Scanner(System.in);
-    	boolean numPiecesCheck = scan2.hasNextInt();
-    	int numPieces = scan2.nextInt();
-
+    	int row = getInt(scan, "Which Row would you like to select from? ");
+    	int numPieces = getInt(scan, "How many pieces do you want to remove from this row? ");
     	return new PlayerInput(row, numPieces);
     }
 }
