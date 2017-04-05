@@ -24,36 +24,20 @@ public class Board {
 	}
 
 	public boolean removePiece(int row, int numofPieces) {
-		boolean canRemovePiece = false;
-		if (row > 0 && row < 4) {
-			if (row == 1) {
-				if (numofPieces >= rows[0] && rows[0] > 0) {
-					canRemovePiece = true;
-					rows[0] = rows[0] - numofPieces;
-				} else {
-					canRemovePiece = false;
-				}
-			} else if (row == 2) {
-				if (numofPieces >= rows[1] && rows[1] > 0) {
-					canRemovePiece = true;
-					rows[1] = rows[1] - numofPieces;
-				} else {
-					canRemovePiece = false;
-				}
-			} else if (row == 3) {
-				if (numofPieces >= rows[2] && rows[2] > 0) {
-					canRemovePiece = true;
-					rows[2] = rows[2] - numofPieces;
-				} else {
-					canRemovePiece = false;
-				}
-			} else {
-				canRemovePiece = false;
-			}
-		} else {
-			canRemovePiece = false;
+		if (row <= 0 && row >= rows.length)
+		{
+			System.out.println(row + " is an invalid Row! Try again.");
+			return false;
 		}
-		return canRemovePiece;
+
+		if (numofPieces <= 0 || numofPieces > rows[row - 1])
+		{
+			System.out.println(numofPieces + " is an invalid number of pieces! Try again.");
+			return false;
+		}
+
+		rows[row] = rows[row] - numofPieces;
+		return true;
 	}
 
 	public boolean anyPiecesLeft() {
@@ -62,6 +46,11 @@ public class Board {
 		} else {
 			return true;
 		}
+	}
+
+	public int getNumRows()
+	{
+		return rows.length;
 	}
 
 }
