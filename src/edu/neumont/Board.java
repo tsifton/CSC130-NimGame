@@ -8,16 +8,19 @@ public class Board {
 
 	public void displayBoard() {
 		for (int x = 0; x < rows[0]; x++) {
-			System.out.print("* ");
+			System.out.print(" * ");
 		}
-		System.out.println();
+        System.out.println();
+
 		for (int x = 0; x < rows[1]; x++) {
-			System.out.print("* ");
+			System.out.print(" * ");
 		}
-		System.out.println();
+        System.out.println();
+
 		for (int x = 0; x < rows[2]; x++) {
-			System.out.print("* ");
+			System.out.print(" * ");
 		}
+        System.out.println();
 	}
 
 	public boolean removePiece(int row, int numofPieces) {

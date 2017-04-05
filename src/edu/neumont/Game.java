@@ -9,7 +9,6 @@ public class Game {
     private Board board = new Board();
     private Player p1, p2;
     private Player currentPlayer;
-    private Player loser;
 
     private boolean isGameOver = false;
 
@@ -21,21 +20,24 @@ public class Game {
 
     public void Play() {
         while(!isGameOver) {
+            board.displayBoard();
             currentPlayer.makeMove(board);
-            SwapCurrentPlayer();
-            /*
-            if (!board.piecesLeft()) {
-                loser = currentPlayer;
+
+            if (!board.anyPiecesLeft()) {
                 isGameOver = true;
             }
-             */
+            else {
+                SwapCurrentPlayer();
+            }
         }
 
         DisplayResults();
     }
 
     private void DisplayResults() {
-
+        String loser = "Player " + (currentPlayer == p1 ? "1" : "2");
+        String winner = "Player " + (currentPlayer == p1 ? "2" : "1");
+        System.out.println(loser + " took the last piece. " + winner + " wins!");
     }
 
     private void SwapCurrentPlayer() {
