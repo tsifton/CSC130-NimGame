@@ -6,26 +6,31 @@ import java.util.Scanner;
 /**
  * Created by Trevor on 4/4/2017.
  */
+
 public class HumanPlayer implements Player{
+	private class PlayerInput {
+		public int row;
+		public int numPieces;
+		public PlayerInput(int row, int numPieces) {
+			this.row = row;
+			this.numPieces = numPieces;
+		}
+	}
     public void makeMove(Board board) {
-    	ArrayList<Integer> input = getInput();
-    	board.removePiece(input.get(0), input.get(1));
+    	PlayerInput input = getInput();
+    	board.removePiece(input.row, input.numPieces);
     }
     
-    private ArrayList<Integer> getInput() {
-    	ArrayList<Boolean> checkList = new ArrayList<Boolean>();
-    	ArrayList<Integer> values = new ArrayList<Integer>();
+    private PlayerInput getInput() {
     	Scanner scan = new Scanner(System.in);
     	System.out.print("Which Row would you like to select from? ");
-    	boolean row = scan.hasNextInt();
-    	checkList.add(row);
-    	values.add(scan.nextInt());
+    	boolean rowCheck = scan.hasNextInt();
+    	int row = scan.nextInt();
     	System.out.print("How many pieces do you want to remove from this row? ");
     	Scanner scan2 = new Scanner(System.in);
-    	boolean numOfPieces = scan2.hasNextInt();
-    	checkList.add(numOfPieces);
-    	values.add(scan2.nextInt());
+    	boolean numPiecesCheck = scan2.hasNextInt();
+    	int numPieces = scan2.nextInt();
 
-    	return values;
+    	return new PlayerInput(row, numPieces);
     }
 }
