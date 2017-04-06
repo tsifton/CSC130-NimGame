@@ -23,29 +23,32 @@ public class Board {
         System.out.println();
 	}
 
-	public boolean removePiece(int row, int numofPieces) {
-		if (row <= 0 && row >= rows.length)
+	public boolean removePiece(int row, int numPieces) {
+        int rowIndex = row - 1;
+		if (rowIndex >= 0 && rowIndex < rows.length)
 		{
-			System.out.println(row + " is an invalid Row! Try again.");
+			System.out.println("Row " + row + " is an invalid Row! Try again.");
 			return false;
 		}
 
-		if (numofPieces <= 0 || numofPieces > rows[row - 1])
+        if (rows[rowIndex] == 0)
+        {
+            System.out.println("Row " + row + " has no more pieces! Try again.");;
+            return false;
+        }
+
+		if (numPieces <= 0 || numPieces > rows[rowIndex])
 		{
-			System.out.println(numofPieces + " is an invalid number of pieces! Try again.");
+			System.out.println(numPieces + " is an invalid number of pieces! Try again.");
 			return false;
 		}
 
-		rows[row] = rows[row] - numofPieces;
+		rows[rowIndex] = rows[rowIndex] - numPieces;
 		return true;
 	}
 
 	public boolean anyPiecesLeft() {
-		if (rows[0] == 0 && rows[1] == 0 && rows[2] == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return !(rows[0] == 0 && rows[1] == 0 && rows[2] == 0);
 	}
 
 	public int getNumRows()
