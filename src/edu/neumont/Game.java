@@ -20,6 +20,7 @@ public class Game {
     public void Play() {
         while(!isGameOver) {
             board.displayBoard();
+            QueryMove();
             currentPlayer.makeMove(board);
 
             if (!board.anyPiecesLeft()) {
@@ -33,10 +34,20 @@ public class Game {
         DisplayResults();
     }
 
+    private void QueryMove()
+    {
+        System.out.println("[" + GetCurrentPlayerString() + "'s Turn]:");
+    }
+
     private void DisplayResults() {
-        String loser = "Player " + (currentPlayer == p1 ? "1" : "2");
+        String loser = GetCurrentPlayerString();
         String winner = "Player " + (currentPlayer == p1 ? "2" : "1");
-        System.out.println(loser + " took the last piece. " + winner + " wins!");
+        System.out.println("\n" + loser + " took the last piece. " + winner + " wins!");
+    }
+
+    private String GetCurrentPlayerString()
+    {
+       return "Player " + (currentPlayer == p1 ? "1" : "2");
     }
 
     private void SwapCurrentPlayer() {

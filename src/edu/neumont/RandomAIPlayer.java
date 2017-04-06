@@ -1,5 +1,6 @@
 package edu.neumont;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -9,7 +10,11 @@ public class RandomAIPlayer implements Player {
 
     @Override
     public void makeMove(Board board) {
-
+        Random rand = new Random();
+        ArrayList<Integer> validRows = board.getValidRows();
+        int row = validRows.get(rand.nextInt(validRows.size()));
+        int pieces = rand.nextInt(board.getNumPiecesLeftInRow(row)) + 1;
+        board.removePiece(row, pieces);
     }
 
 }
