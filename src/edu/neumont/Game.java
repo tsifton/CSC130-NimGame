@@ -23,11 +23,11 @@ public class Game {
             QueryMove();
             currentPlayer.makeMove(board);
 
-            if (!board.anyPiecesLeft()) {
-                isGameOver = true;
+            if (board.hasPiecesLeft()) {
+                SwapCurrentPlayer();
             }
             else {
-                SwapCurrentPlayer();
+                isGameOver = true;
             }
         }
 

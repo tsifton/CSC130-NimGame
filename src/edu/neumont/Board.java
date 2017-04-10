@@ -49,7 +49,7 @@ public class Board {
         System.out.println();
 	}
 
-	public boolean anyPiecesLeft() {
+	public boolean hasPiecesLeft() {
 		return rows[0] != 0 || rows[1] != 0 || rows[2] != 0;
 	}
 
