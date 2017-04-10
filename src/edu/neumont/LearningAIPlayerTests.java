@@ -8,7 +8,6 @@ public class LearningAIPlayerTests {
 
 	@Test
 	public void LastMoveTest() {
-
 		fail("Not yet implemented");
 	}
 
