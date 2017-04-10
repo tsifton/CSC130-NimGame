@@ -6,7 +6,7 @@ package edu.neumont;
 public class LearningAIPlayer implements Player {
 
     @Override
-    public void makeMove(BoardState state) {
+    public void makeMove(Board board) {
 
     }
 

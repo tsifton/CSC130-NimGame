@@ -8,27 +8,24 @@ import java.util.Random;
  */
 public class RandomAIPlayer implements Player {
 
+    private Random rand = new Random();
+
     @Override
-    public void makeMove(BoardState state) {
-        Random rand = new Random();
+    public void makeMove(Board board) {
+        BoardState state = board.getState();
         ArrayList<Integer> validRows = getValidRows(state);
         int row = validRows.get(rand.nextInt(validRows.size()));
-        int pieces = rand.nextInt(board.getNumPiecesLeftInRow(row)) + 1;
-        board.removePiece(row, pieces);
+        int pieces = rand.nextInt(state.rows[row]) + 1;
+        board.removePieces(row, pieces);
     }
 
     private ArrayList<Integer> getValidRows(BoardState state)
     {
-        ArrayList<Integer> validRows = new ArrayList<>(rows.length);
-        for(int i = 0; i < rows.length; i++)
+        ArrayList<Integer> validRows = new ArrayList<>();
+        for(int i = 0; i < state.rows.length; i++)
         {
-            if(rows[i] != 0) validRows.add(i + 1);
+            if(state.rows[i] != 0) validRows.add(i);
         }
         return validRows;
-    }
-
-    private int getNumPiecesLeftInRow(BoardState state, int row)
-    {
-        return state.rows[row - 1];
     }
 }
