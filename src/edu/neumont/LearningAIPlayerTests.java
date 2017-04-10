@@ -8,8 +8,6 @@ public class LearningAIPlayerTests {
 
 	@Test
 	public void LastMoveTest() {
-	    BoardState state = new BoardState(new int[]{3, 0, 0});
-
 
 		fail("Not yet implemented");
 	}
