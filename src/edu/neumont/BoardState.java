@@ -5,6 +5,16 @@ package edu.neumont;
  */
 public class BoardState {
 
-    public int[] rows = new int[3];
-    public float weight;
+    public BoardState(int[] rows){
+        this.rows = rows;
+    }
+
+    public BoardState(int[] rows, float weight)
+    {
+        this.rows = rows;
+        this.weight = weight;
+    }
+
+    public int[] rows;
+    public float weight = 0.0f;
 }

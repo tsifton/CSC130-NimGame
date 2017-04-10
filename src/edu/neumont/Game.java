@@ -36,18 +36,19 @@ public class Game {
 
     private void QueryMove()
     {
-        System.out.println("[" + GetCurrentPlayerString() + "'s Turn]:");
+        System.out.println("[" + GetPlayerString(currentPlayer) + "'s Turn]:");
     }
 
     private void DisplayResults() {
-        String loser = GetCurrentPlayerString();
-        String winner = "Player " + (currentPlayer == p1 ? "2" : "1");
-        System.out.println("\n" + loser + " took the last piece. " + winner + " wins!");
+        board.displayBoard();
+        String loser = GetPlayerString(currentPlayer);
+        String winner = GetPlayerString(currentPlayer != p1 ? p1 : p2);
+        System.out.println(loser + " took the last piece. " + winner + " wins!");
     }
 
-    private String GetCurrentPlayerString()
+    private String GetPlayerString(Player player)
     {
-       return "Player " + (currentPlayer == p1 ? "1" : "2");
+       return "Player " + (player == p1 ? "1" : "2");
     }
 
     private void SwapCurrentPlayer() {
