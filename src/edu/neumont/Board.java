@@ -5,7 +5,22 @@ package edu.neumont;
  */
 public class Board {
 
-	private int[] rows = new int[] { 3, 5, 7 };
+	private int[] rows;
+	private StateHistory history = new StateHistory();
+
+    public Board()
+    {
+        init(3, 5, 7);
+    }
+
+	public Board(int row1, int row2, int row3) {
+        init(row1, row2, row3);
+    }
+
+    private void init(int row1, int row2, int row3)
+    {
+        rows = new int[] {row1, row2, row3};
+    }
 
 	public BoardState getState()
     {
@@ -32,6 +47,7 @@ public class Board {
         }
 
         rows[row] -= numPieces;
+        history.Add(new BoardState(rows));
         return true;
     }
 

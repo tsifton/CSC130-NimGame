@@ -29,8 +29,12 @@ public class StateHistory {
         }
     }
 
-    private float Average(float weight1, float weight2)
+    public ArrayList<BoardState> getStates()
     {
+        return history;
+    }
+
+    private float Average(float weight1, float weight2) {
         return (weight1 + weight2) / 2;
     }
 }
