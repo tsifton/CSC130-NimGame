@@ -1,9 +1,11 @@
 package edu.neumont;
 
+import java.io.Serializable;
+
 /**
  * Created by Trevor on 4/7/2017.
  */
-public class BoardState {
+public class BoardState implements Serializable {
 
     public BoardState(int[] rows){
         this.rows = rows;
