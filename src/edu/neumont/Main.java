@@ -12,6 +12,6 @@ public class Main {
         ArrayList<BoardState> list = new ArrayList<BoardState>();
         list.add(state);
         file.writeToFile(list, "Bob.txt");
-        ArrayList<BoardState> newList = file.readFromFile("bob.txt");
+        ArrayList<BoardState> newList = file.readFromFile("Bob.txt");
     }
 }
