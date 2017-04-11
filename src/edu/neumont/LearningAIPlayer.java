@@ -9,6 +9,7 @@ import java.util.Random;
  */
 public class LearningAIPlayer implements Player {
 
+    private Random rand = new Random();
     private StateHistory history;
 
     public LearningAIPlayer(StateHistory history)
@@ -16,10 +17,22 @@ public class LearningAIPlayer implements Player {
         this.history = history;
     }
 
-    private Random rand = new Random();
-
     @Override
     public void makeMove(Board board) {
+        if (history != null)
+        {
+            ArrayList<BoardState> stateHistory = history.getStates();
+            ArrayList<BoardState> possibleStates = findPossibleStates(stateHistory);
+        }
+    }
+
+    private ArrayList<BoardState> findPossibleStates(ArrayList<BoardState> states)
+    {
+
+    }
+
+    private void makeRandomMove(Board board)
+    {
         BoardState state = board.getState();
         ArrayList<Integer> validRows = getValidRows(state);
         int row = validRows.get(rand.nextInt(validRows.size()));

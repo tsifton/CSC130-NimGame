@@ -6,6 +6,7 @@ package edu.neumont;
 public class Board {
 
 	private int[] rows;
+	private StateHistory history = new StateHistory();
 
     public Board()
     {
@@ -46,6 +47,7 @@ public class Board {
         }
 
         rows[row] -= numPieces;
+        history.Add(new BoardState(rows));
         return true;
     }
 

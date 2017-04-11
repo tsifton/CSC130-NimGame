@@ -12,7 +12,7 @@ public class LearningAIPlayerTests {
         Board board = new Board(2, 0, 0);
 	    FileIO file = new FileIO();
 	    StateHistory history = new StateHistory(file.readFromFile("AIHistory"));
-	    LearningAIPlayer ai = new LearningAIPlayer(history);
+		LearningAIPlayer ai = new LearningAIPlayer(history);
 	    BoardState expectedState = new BoardState(new int[] {1,0,0});
 
 	    // Act

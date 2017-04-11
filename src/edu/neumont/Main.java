@@ -8,10 +8,9 @@ public class Main {
         Game game = new Game(new RandomAIPlayer(), new RandomAIPlayer());
         game.Play();
         FileIO file = new FileIO();
-        BoardState state = new BoardState(new int[] {1,2,3});
-        ArrayList<BoardState> list = new ArrayList<BoardState>();
+        BoardState state = new BoardState(new int[] {2, 0, 0}, 1.0f);
+        ArrayList<BoardState> list = new ArrayList<>();
         list.add(state);
-        file.writeToFile(list, "Bob.txt");
-        ArrayList<BoardState> newList = file.readFromFile("Bob.txt");
+        file.writeToFile(list, "AIHistory");
     }
 }
