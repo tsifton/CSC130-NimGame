@@ -23,9 +23,17 @@ public class StateHistory {
         for (BoardState prevState : history) {
             if (prevState.rows.equals(state.rows)) {
                 prevState.weight = Average(prevState.weight, state.weight);
-            } else {
-                history.add(state);
+                return;
             }
+        }
+        history.add(new BoardState(state.rows.clone(), state.weight));
+    }
+
+    public void Add(StateHistory newHistory)
+    {
+        for (BoardState newState : newHistory.getStates())
+        {
+            Add(newState);
         }
     }
 

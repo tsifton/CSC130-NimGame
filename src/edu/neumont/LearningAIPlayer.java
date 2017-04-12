@@ -1,5 +1,6 @@
 package edu.neumont;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,22 +9,39 @@ import java.util.Random;
  */
 public class LearningAIPlayer implements Player {
 
-	private Random rand = new Random();
-	private StateHistory history;
+    private class Move {
+        public int row;
+        public int numPieces;
 
-	public LearningAIPlayer(StateHistory history) {
-		this.history = history;
-	}
+        public Move(int row, int numPieces) {
+            this.row = row;
+            this.numPieces = numPieces;
+        }
+    }
 
-	@Override
-	public void makeMove(Board board) {
-		if (history != null) {
-			ArrayList<BoardState> stateHistory = history.getStates();
-			ArrayList<BoardState> possibleStates = findPossibleStates(stateHistory);
-		}
-	}
+    private Random rand = new Random();
+    private StateHistory history;
 
-	private ArrayList<BoardState> findPossibleStates(ArrayList<BoardState> states) {
+    public LearningAIPlayer(StateHistory history) {
+        this.history = history;
+    }
+
+    @Override
+    public void makeMove(Board board) {
+        Move move = null;
+        if (history != null) {
+            ArrayList<BoardState> stateHistory = history.getStates();
+            ArrayList<BoardState> possibleStates = getPossibleStates(stateHistory);
+            move = getBestMove(board.getState(), possibleStates);
+        }
+
+        if (move == null){
+            move = getRandomMove(board);
+        }
+        board.removePieces(move.row, move.numPieces);
+    }
+
+    private ArrayList<BoardState> getPossibleStates(ArrayList<BoardState> states) {
 		ArrayList<BoardState> list = new ArrayList<BoardState>();
 		for (int state = 0; state < list.size(); state++) {
 			for (int values = 0; values < states.get(state).rows.length; values++) {
@@ -35,20 +53,37 @@ public class LearningAIPlayer implements Player {
 		return list;
 	}
 
-	private void makeRandomMove(Board board) {
-		BoardState state = board.getState();
-		ArrayList<Integer> validRows = getValidRows(state);
-		int row = validRows.get(rand.nextInt(validRows.size()));
-		int pieces = rand.nextInt(state.rows[row]) + 1;
-		board.removePieces(row, pieces);
-	}
+    private Move getBestMove(BoardState currentState, ArrayList<BoardState> states) {
+        BoardState bestState = new BoardState(new int[]{}, Float.MIN_VALUE);
+        for (BoardState state : states)
+        {
+            if (state.weight > bestState.weight) bestState = state;
+        }
 
-	private ArrayList<Integer> getValidRows(BoardState state) {
-		ArrayList<Integer> validRows = new ArrayList<>();
-		for (int i = 0; i < state.rows.length; i++) {
-			if (state.rows[i] != 0)
-				validRows.add(i);
-		}
-		return validRows;
-	}
+        Move bestMove = null;
+        for (int i = 0; i < bestState.rows.length; ++i)
+        {
+            if (bestState.rows[i] != currentState.rows[i])
+            {
+                bestMove = new Move(bestState.rows[i], bestState.rows[i] - currentState.rows[i]);
+            }
+        }
+        return bestMove;
+    }
+
+    private Move getRandomMove(Board board) {
+        BoardState state = board.getState();
+        ArrayList<Integer> validRows = getValidRows(state);
+        int row = validRows.get(rand.nextInt(validRows.size()));
+        int pieces = rand.nextInt(state.rows[row]) + 1;
+        return new Move(row, pieces);
+    }
+
+    private ArrayList<Integer> getValidRows(BoardState state) {
+        ArrayList<Integer> validRows = new ArrayList<>();
+        for(int i = 0; i < state.rows.length; i++) {
+            if(state.rows[i] != 0) validRows.add(i);
+        }
+        return validRows;
+    }
 }

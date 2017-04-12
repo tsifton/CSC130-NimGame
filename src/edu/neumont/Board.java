@@ -1,5 +1,7 @@
 package edu.neumont;
 
+import java.util.ArrayList;
+
 /**
  * Created by Trevor on 4/4/2017.
  */
@@ -47,8 +49,23 @@ public class Board {
         }
 
         rows[row] -= numPieces;
-        history.Add(new BoardState(rows));
+        if (hasPiecesLeft()) history.Add(new BoardState(rows));
         return true;
+    }
+
+    public StateHistory getStateHistory(){
+        ArrayList<BoardState> boardStates = history.getStates();
+        int weightDenominator = 1;
+        int denominatorCount = 0;
+        int index = boardStates.size() - 1;
+        while (index >= 0)
+        {
+            boardStates.get(index).weight = 1.0f / weightDenominator;
+            weightDenominator *= -1;
+            if (++denominatorCount % 2 == 0) weightDenominator++;
+            --index;
+        }
+        return history;
     }
 
 	public void displayBoard() {
