@@ -31,7 +31,7 @@ public class LearningAIPlayer implements Player {
         Move move = null;
         if (history != null) {
             ArrayList<BoardState> stateHistory = history.getStates();
-            ArrayList<BoardState> possibleStates = getPossibleStates(stateHistory);
+            ArrayList<BoardState> possibleStates = getPossibleStates(board.getState(), stateHistory);
             move = getBestMove(board.getState(), possibleStates);
         }
 
@@ -41,14 +41,16 @@ public class LearningAIPlayer implements Player {
         board.removePieces(move.row, move.numPieces);
     }
 
-    private ArrayList<BoardState> getPossibleStates(ArrayList<BoardState> states) {
+    private ArrayList<BoardState> getPossibleStates(BoardState currentState, ArrayList<BoardState> states) {
 		ArrayList<BoardState> list = new ArrayList<BoardState>();
-		for (int state = 0; state < list.size(); state++) {
-			for (int values = 0; values < states.get(state).rows.length; values++) {
-				if (states.get(state).rows[values] > /*Current State*/) {
-					
-				}
+		for (BoardState possibleState : states) {
+			boolean rowHasLessPieces = false;
+			int numEqualRows = 0;
+			for (int row = 0; row < possibleState.rows.length; row++) {
+				if (possibleState.rows[row] < currentState.rows[row]) rowHasLessPieces = true;
+				if(possibleState.rows[row] == currentState.rows[row]) numEqualRows++;
 			}
+			if(rowHasLessPieces && numEqualRows == 2) list.add(possibleState);
 		}
 		return list;
 	}
