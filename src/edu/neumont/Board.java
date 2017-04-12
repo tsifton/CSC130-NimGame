@@ -53,7 +53,6 @@ public class Board {
         return true;
     }
 
-    // This is Wrong!!!! Fix it.
     public StateHistory getStateHistory(){
         ArrayList<BoardState> boardStates = history.getStates();
         int weightDenominator = 1;
@@ -62,8 +61,8 @@ public class Board {
         while (index >= 0)
         {
             boardStates.get(index).weight = 1 / weightDenominator;
-            if (++denominatorCount % 2 == 0) weightDenominator = denominatorCount;
             weightDenominator *= -1;
+            if (++denominatorCount % 2 == 0) weightDenominator++;
         }
         return history;
     }
