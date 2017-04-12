@@ -42,7 +42,7 @@ public class LearningAIPlayer implements Player {
     }
 
     private ArrayList<BoardState> getPossibleStates(ArrayList<BoardState> states) {
-
+        return new ArrayList<BoardState>();
     }
 
     private Move getBestMove(BoardState currentState, ArrayList<BoardState> states) {
@@ -53,8 +53,6 @@ public class LearningAIPlayer implements Player {
         }
 
         Move bestMove = null;
-        if (bestState.weight < 0.0f) return bestMove;
-
         for (int i = 0; i < bestState.rows.length; ++i)
         {
             if (bestState.rows[i] != currentState.rows[i])

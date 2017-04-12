@@ -57,12 +57,13 @@ public class Board {
         ArrayList<BoardState> boardStates = history.getStates();
         int weightDenominator = 1;
         int denominatorCount = 0;
-        int index = boardStates.size();
+        int index = boardStates.size() - 1;
         while (index >= 0)
         {
-            boardStates.get(index).weight = 1 / weightDenominator;
+            boardStates.get(index).weight = 1.0f / weightDenominator;
             weightDenominator *= -1;
             if (++denominatorCount % 2 == 0) weightDenominator++;
+            --index;
         }
         return history;
     }

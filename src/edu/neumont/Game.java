@@ -17,41 +17,46 @@ public class Game {
         currentPlayer = p1;
     }
 
-    public void Play() {
+    public void play() {
         while(!isGameOver) {
-            board.displayBoard();
-            QueryMove();
+            //board.displayBoard();
+            //queryMove();
             currentPlayer.makeMove(board);
 
             if (board.hasPiecesLeft()) {
-                SwapCurrentPlayer();
+                swapCurrentPlayer();
             }
             else {
                 isGameOver = true;
             }
         }
         
-        DisplayResults();
+        //displayResults();
     }
 
-    private void QueryMove()
+    public StateHistory getHistory()
     {
-        System.out.println("[" + GetPlayerString(currentPlayer) + "'s Turn]:");
+        return board.getStateHistory();
     }
 
-    private void DisplayResults() {
+    private void queryMove()
+    {
+        System.out.println("[" + getPlayerString(currentPlayer) + "'s Turn]:");
+    }
+
+    private void displayResults() {
         board.displayBoard();
-        String loser = GetPlayerString(currentPlayer);
-        String winner = GetPlayerString(currentPlayer != p1 ? p1 : p2);
+        String loser = getPlayerString(currentPlayer);
+        String winner = getPlayerString(currentPlayer != p1 ? p1 : p2);
         System.out.println(loser + " took the last piece. " + winner + " wins!");
     }
 
-    private String GetPlayerString(Player player)
+    private String getPlayerString(Player player)
     {
        return "Player " + (player == p1 ? "1" : "2");
     }
 
-    private void SwapCurrentPlayer() {
+    private void swapCurrentPlayer() {
         currentPlayer = (currentPlayer == p1) ? p2 : p1;
     }
 }
