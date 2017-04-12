@@ -30,7 +30,7 @@ public class Game {
                 isGameOver = true;
             }
         }
-
+        
         DisplayResults();
     }
 
