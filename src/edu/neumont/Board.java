@@ -44,7 +44,7 @@ public class Board {
 
         if (numPieces <= 0 || numPieces > rows[row])
         {
-            System.out.println(numPieces + " is an invalid number of pieces! Try again.");
+            System.out.println(numPieces + " is an invalid number of pieces for row " + row + "! Try again.");
             return false;
         }
 

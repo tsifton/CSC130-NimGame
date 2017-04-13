@@ -39,6 +39,8 @@ public class Game {
         return board.getStateHistory();
     }
 
+    public int getWinner() { return (currentPlayer != p1 ? 1 : 2); }
+
     private void queryMove()
     {
         System.out.println("[" + getPlayerString(currentPlayer) + "'s Turn]:");
@@ -59,4 +61,6 @@ public class Game {
     private void swapCurrentPlayer() {
         currentPlayer = (currentPlayer == p1) ? p2 : p1;
     }
+
+
 }
