@@ -25,56 +25,64 @@ public class LearningAIPlayerTests {
 		assertArrayEquals(board.getState().rows, expectedState.rows);
 	}
 
+    @Test
+    public void RemoveInvalidNumberOfPiecesTest() throws Exception {
+        // Arrange
+        Board board = new Board(3, 5, 7);
+
+        // Act
+        boolean result = board.removePieces(0, 4);
+
+        // Assert
+        assertFalse(result);
+    }
+
+    @Test
+    public void RemovePiecesFromInvalidRowTest() throws Exception {
+        // Arrange
+        Board board = new Board(3, 5, 7);
+
+        // Act
+        boolean result = board.removePieces(4, 3);
+
+        // Assert
+        assertFalse(result);
+    }
+
 	@Test
 	public void writeToFileTest() {
+	    // Arrange
 		FileIO fileIO = new FileIO();
 		BoardState state = new BoardState(new int[] { 1, 5, 7 });
 		ArrayList<BoardState> list = new ArrayList<BoardState>();
 		list.add(state);
+
+		// Act
 		fileIO.writeToFile(list, "testFile");
+
+		// Assert
 		File file = new File("testFile");
 		assertTrue(file.exists());
 	}
 
 	@Test
 	public void readFromFileTest() {
+	    // Arrange
 		FileIO fileIO = new FileIO();
 		BoardState state = new BoardState(new int[] { 1, 5, 7 });
 		BoardState state2 = new BoardState(new int[] { 1, 3, 7 });
 		BoardState state3 = new BoardState(new int[] { 1, 2, 7 });
-
 		ArrayList<BoardState> list = new ArrayList<BoardState>();
 		list.add(state);
 		list.add(state2);
 		list.add(state3);
 		fileIO.writeToFile(list, "testFile2");
+
+		// Act
 		ArrayList<BoardState> readState = fileIO.readFromFile("testFile2");
+
+		// Assert
 		assertEquals(list.size(), readState.size());
-	}
-
-	@Test
-	public void RemoveInvalidNumberOfPiecesTest() throws Exception {
-		// Arrange
-		Board board = new Board(3, 5, 7);
-
-		// Act
-		boolean result = board.removePieces(0, 4);
-
-		// Assert
-		assertFalse(result);
-	}
-
-	@Test
-	public void RemovePiecesFromInvalidRowTest() throws Exception {
-		// Arrange
-		Board board = new Board(3, 5, 7);
-
-		// Act
-		boolean result = board.removePieces(4, 3);
-
-		// Assert
-		assertFalse(result);
-
 	}
 
 }
