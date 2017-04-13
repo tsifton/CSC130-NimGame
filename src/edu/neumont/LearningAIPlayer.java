@@ -63,11 +63,11 @@ public class LearningAIPlayer implements Player {
         }
 
         Move bestMove = null;
-        for (int i = 0; i < bestState.rows.length; ++i)
+        for (int row = 0; row < bestState.rows.length; ++row)
         {
-            if (bestState.rows[i] != currentState.rows[i])
+            if (bestState.rows[row] != currentState.rows[row])
             {
-                bestMove = new Move(bestState.rows[i], bestState.rows[i] - currentState.rows[i]);
+                bestMove = new Move(row,currentState.rows[row] - bestState.rows[row]);
             }
         }
         return bestMove;

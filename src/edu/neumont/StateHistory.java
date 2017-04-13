@@ -1,6 +1,7 @@
 package edu.neumont;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Trevor on 4/10/2017.
@@ -21,7 +22,7 @@ public class StateHistory {
 
     public void Add(BoardState state) {
         for (BoardState prevState : history) {
-            if (prevState.rows.equals(state.rows)) {
+            if (Arrays.equals(prevState.rows, state.rows)) {
                 prevState.weight = Average(prevState.weight, state.weight);
                 return;
             }
