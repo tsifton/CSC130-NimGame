@@ -11,7 +11,7 @@ import org.junit.Test;
 public class LearningAIPlayerTests {
 
 	@Test
-	public void moveTest1() throws Exception {
+	public void LearningAIPlayerTest() throws Exception {
 	    // Arrange
         Board board = new Board(2, 0, 0);
 	    FileIO file = new FileIO();
@@ -26,6 +26,7 @@ public class LearningAIPlayerTests {
         assertArrayEquals(board.getState().rows, expectedState.rows);
 	}
 	
+
 	@Test
 	public void writeToFileTest() {
 		FileIO fileIO = new FileIO();
@@ -45,6 +46,25 @@ public class LearningAIPlayerTests {
 		BoardState state3 = new BoardState(new int[] {1,2,7});
 
 		ArrayList<BoardState> list = new ArrayList<BoardState>();
+    @Test
+    public void RemoveInvalidNumberOfPiecesTest() throws Exception {
+        // Arrange
+        Board board = new Board(3, 5, 7);
+
+        // Act
+        boolean result = board.removePieces(0, 4);
+
+        //Assert
+        assertFalse(result);
+    }
+
+    @Test
+    public void RemovePiecesFromInvalidRowTest() throws Exception {
+        // Arrange
+        Board board = new Board(3, 5, 7);
+
+        // Act
+        boolean result = board.removePieces(4, 3);
 		list.add(state);
 		list.add(state2);
 		list.add(state3);
@@ -52,4 +72,8 @@ public class LearningAIPlayerTests {
 		ArrayList<BoardState> readState = fileIO.readFromFile("testFile2");
 		assertEquals(list.size(), readState.size());
 	}
+
+        //Assert
+        assertFalse(result);
+    }
 }
