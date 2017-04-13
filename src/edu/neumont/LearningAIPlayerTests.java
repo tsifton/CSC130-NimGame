@@ -6,7 +6,7 @@ import org.junit.Test;
 public class LearningAIPlayerTests {
 
 	@Test
-	public void moveTest1() throws Exception {
+	public void LearningAIPlayerTest() throws Exception {
 	    // Arrange
         Board board = new Board(2, 0, 0);
 	    FileIO file = new FileIO();
@@ -20,4 +20,28 @@ public class LearningAIPlayerTests {
 		//Assert
         assertArrayEquals(board.getState().rows, expectedState.rows);
 	}
+
+    @Test
+    public void RemoveInvalidNumberOfPiecesTest() throws Exception {
+        // Arrange
+        Board board = new Board(3, 5, 7);
+
+        // Act
+        boolean result = board.removePieces(0, 4);
+
+        //Assert
+        assertFalse(result);
+    }
+
+    @Test
+    public void RemovePiecesFromInvalidRowTest() throws Exception {
+        // Arrange
+        Board board = new Board(3, 5, 7);
+
+        // Act
+        boolean result = board.removePieces(4, 3);
+
+        //Assert
+        assertFalse(result);
+    }
 }
