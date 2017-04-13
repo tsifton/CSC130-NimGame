@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 public class FileIO {
 
+	public FileIO() {
+
+	}
 	public void writeToFile(ArrayList<BoardState> list, String fileName) {
 		try {
 			FileOutputStream stream = new FileOutputStream(fileName);
@@ -18,12 +21,18 @@ public class FileIO {
 	}
 
 	public ArrayList<BoardState> readFromFile(String fileName) {
+		File file = new File(fileName);
 		ArrayList<BoardState> list = new ArrayList<>();
-		try (InputStream in = new FileInputStream(fileName)) {
+		try {
+			if(file.exists()) {
+			InputStream in = new FileInputStream(fileName);
 			ObjectInputStream ois = new ObjectInputStream(in);
 			list = (ArrayList) ois.readObject();
 			ois.close();
 			in.close();
+			} else {
+				file.createNewFile();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

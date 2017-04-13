@@ -12,7 +12,7 @@ public class Main {
         int p2Wins = 0;
         for (int i = 0; i < 100000; ++i)
         {
-            Game game = new Game(new LearningAIPlayer(history), new LearningAIPlayer(history));
+            Game game = new Game(new LearningAIPlayer(history), new RandomAIPlayer());
             game.play();
             if (game.getWinner() == 1) p1Wins++;
             else p2Wins++;
